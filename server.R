@@ -20,15 +20,24 @@ diamonds <- diamonds[(diamonds$carat < quantile(diamonds$carat, probs = 0.99)), 
 # linear model
 model <- lm(price ~ ., diamonds)
 
+
+
 shinyServer(function(input, output) {
 
+    output$Title1 <- renderText({
+        paste0(strong("Distribution of numeric variables"))
+    })
     
     output$Plot <- renderPlot({
         
         g1 = ggplot(data=diamonds) + geom_histogram(aes(price), bins=50, fill="coral1", color="black")
         g2 = ggplot(data=diamonds) + geom_histogram(aes(carat), bins=50, fill="coral1", color="black")
+        g3 = ggplot(data=diamonds) + geom_histogram(aes(depth), bins=50, fill="coral1", color="black")
+        g4 = ggplot(data=diamonds) + geom_histogram(aes(x), bins=50, fill="coral1", color="black")
+        g5 = ggplot(data=diamonds) + geom_histogram(aes(y), bins=50, fill="coral1", color="black")
+        g6 = ggplot(data=diamonds) + geom_histogram(aes(z), bins=50, fill="coral1", color="black")
         
-        plot_grid(g1, g2, ncol = 2)
+        plot_grid(g1, g2, g3, g4, g5, g6)
     })
     
     output$Text <- renderText({

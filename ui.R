@@ -54,7 +54,7 @@ shinyUI(fluidPage(
         ),
         
         mainPanel(
-
+            htmlOutput("Title1"),
             plotOutput("Plot"),
             htmlOutput("Text")
         )
